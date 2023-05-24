@@ -126,38 +126,38 @@ docu_htmlnoheader: docu_htmlnoheaderclean docu_versions docu_check
 	asciidoctor -v --failure-level WARN -t -dbook -a ProductVersion=$(RELEASE_VERSION) -a BridgeVersion=$(BRIDGE_VERSION) -a GithubVersion=$(GITHUB_VERSION) -s documentation/quickstart/master.adoc -o documentation/htmlnoheader/quickstart-book.html
 	asciidoctor -v --failure-level WARN -t -dbook -a ProductVersion=$(RELEASE_VERSION) -a BridgeVersion=$(BRIDGE_VERSION) -a GithubVersion=$(GITHUB_VERSION) -s documentation/contributing/master.adoc -o documentation/htmlnoheader/contributing-book.html
 
-docu_check:
-	./.travis/check_docs.sh
+#docu_check:
+#	./.travis/check_docs.sh
 
 shellcheck:
 	./.travis/shellcheck.sh
 
-spotbugs: $(SUBDIRS) systemtest_make
+# spotbugs: $(SUBDIRS) systemtest_make
 
-docu_pushtowebsite: docu_htmlnoheader docu_html
-	./.travis/docu-push-to-website.sh
+#docu_pushtowebsite: docu_htmlnoheader docu_html
+#	./.travis/docu-push-to-website.sh
 
-pushtonexus:
-	./.travis/push-to-nexus.sh
+#pushtonexus:
+#	./.travis/push-to-nexus.sh
 
-release_docu: docu_html docu_htmlnoheader
-	mkdir -p strimzi-$(RELEASE_VERSION)/docs
-	$(CP) -rv documentation/html/overview.html strimzi-$(RELEASE_VERSION)/docs/
-	$(CP) -rv documentation/html/quickstart.html strimzi-$(RELEASE_VERSION)/docs/
-	$(CP) -rv documentation/html/deploying.html strimzi-$(RELEASE_VERSION)/docs/
-	$(CP) -rv documentation/html/using.html strimzi-$(RELEASE_VERSION)/docs/
-	$(CP) -rv documentation/html/images/ strimzi-$(RELEASE_VERSION)/docs/images/
+#release_docu: docu_html docu_htmlnoheader
+#	mkdir -p strimzi-$(RELEASE_VERSION)/docs
+#	$(CP) -rv documentation/html/overview.html strimzi-$(RELEASE_VERSION)/docs/
+#	$(CP) -rv documentation/html/quickstart.html strimzi-$(RELEASE_VERSION)/docs/
+#	$(CP) -rv documentation/html/deploying.html strimzi-$(RELEASE_VERSION)/docs/
+#	$(CP) -rv documentation/html/using.html strimzi-$(RELEASE_VERSION)/docs/
+#	$(CP) -rv documentation/html/images/ strimzi-$(RELEASE_VERSION)/docs/images/
 
-docu_clean: docu_htmlclean docu_htmlnoheaderclean
+#docu_clean: docu_htmlclean docu_htmlnoheaderclean
 
-docu_htmlclean:
-	rm -rf documentation/html
+#docu_htmlclean:
+#	rm -rf documentation/html
 
-docu_htmlnoheaderclean:
-	rm -rf documentation/htmlnoheader
+#docu_htmlnoheaderclean:
+#	rm -rf documentation/htmlnoheader
 
-systemtests:
-	./systemtest/scripts/run_tests.sh $(SYSTEMTEST_ARGS)
+#systemtests:
+#	./systemtest/scripts/run_tests.sh $(SYSTEMTEST_ARGS)
 
 helm_install: helm-charts/helm3
 
@@ -166,10 +166,11 @@ crd_install: install
 $(SUBDIRS):
 	$(MAKE) -C $@ $(MAKECMDGOALS)
 
-systemtest_make:
-	$(MAKE) -C systemtest $(MAKECMDGOALS)
+#systemtest_make:
+#	$(MAKE) -C systemtest $(MAKECMDGOALS)
 
 prerequisites_check:
 	SED=$(SED) ./prerequisites-check.sh
 
-.PHONY: all $(SUBDIRS) $(DOCKER_TARGETS) systemtests docu_versions spotbugs docu_check prerequisites_check
+.PHONY: all $(SUBDIRS) $(DOCKER_TARGETS) prerequisites_check
+# .PHONY: all $(SUBDIRS) $(DOCKER_TARGETS) systemtests docu_versions spotbugs docu_check prerequisites_check

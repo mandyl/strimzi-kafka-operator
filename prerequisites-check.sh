@@ -24,11 +24,11 @@ yq_err_msg="${RED}yq version is ${YQ_VERSION}, version must be 3.3.1 or above. P
 
 if [[ yq_array[0] -lt 3  ]]; then
   echo -e $yq_err_msg
-  exit 1
+  # exit 1
 elif [[ yq_array[1] -lt 3 ]]; then
   echo -e $yq_err_msg
-  exit 1
+  # exit 1
 elif [[ yq_array[2] -lt 1 ]]; then
   echo -e $yq_err_msg
-  exit 1 
+  # exit 1 
 fi

@@ -202,5 +202,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!-- Mirror Maker 2 Extensions -->
+        <dependency>
+            <groupId>io.strimzi</groupId>
+            <artifactId>mirror-maker-2-extensions</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 </project>
